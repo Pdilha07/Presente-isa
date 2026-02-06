@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Para Isadora ❤️</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        background: radial-gradient(circle at top, #1a001a, #000);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        color: #fff;
+    }
+
+    .container {
+        text-align: center;
+        opacity: 0;
+        animation: fadeIn 2.5s forwards;
+    }
+
+    .heart {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        background: #ff2d55;
+        transform: rotate(-45deg);
+        margin: 0 auto 35px;
+        animation: beat 1.2s infinite;
+        box-shadow: 0 0 40px rgba(255, 45, 85, 0.8);
+    }
+
+    .heart::before,
+    .heart::after {
+        content: "";
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        background: #ff2d55;
+        border-radius: 50%;
+    }
+
+    .heart::before {
+        top: -60px;
+        left: 0;
+    }
+
+    .heart::after {
+        left: 60px;
+        top: 0;
+    }
+
+    h1 {
+        font-size: 2.6em;
+        margin-bottom: 8px;
+        letter-spacing: 2px;
+    }
+
+    .date {
+        font-size: 1em;
+        opacity: 0.75;
+        margin-bottom: 25px;
+    }
+
+    p {
+        font-size: 1.2em;
+        line-height: 1.6;
+        max-width: 420px;
+        margin: auto;
+        min-height: 160px;
+    }
+
+    .final {
+        display: none;
+        font-size: 2em;
+        animation: glow 2s infinite alternate;
+    }
+
+    @keyframes beat {
+        0%, 100% { transform: rotate(-45deg) scale(1); }
+        50% { transform: rotate(-45deg) scale(1.15); }
+    }
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 8px #ff2d55; }
+        to { text-shadow: 0 0 22px #ff2d55; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container" id="container">
+    <div class="heart"></div>
+    <div class="date">10 de janeiro</div>
+
+    <p id="texto"></p>
+
+    <div class="final" id="final">
+        Eu te amo, Isadora<br>
+        <span style="font-size: 0.7em;">10 de janeiro ❤️</span>
+    </div>
+</div>
+
+<script>
+const texto = [
+    "Desde o momento em que você entrou na minha vida,",
+    "tudo ganhou mais sentido.",
+    "Você é a melhor namorada do mundo,",
+    "e o motivo dos meus melhores sorrisos."
+];
+
+const elemento = document.getElementById("texto");
+const final = document.getElementById("final");
+const container = document.getElementById("container");
+
+let linha = 0;
+let letra = 0;
+
+function escrever() {
+    if (linha < texto.length) {
+        if (letra < texto[linha].length) {
+            elemento.innerHTML += texto[linha].charAt(letra);
+            letra++;
+            setTimeout(escrever, 50);
+        } else {
+            elemento.innerHTML += "<br>";
+            linha++;
+            letra = 0;
+            setTimeout(escrever, 400);
+        }
+    } else {
+        setTimeout(finalSurpresa, 1800);
+    }
+}
+
+function finalSurpresa() {
+    elemento.style.display = "none";
+    document.querySelector(".heart").style.display = "none";
+    document.querySelector(".date").style.display = "none";
+
+    final.style.display = "block";
+}
+
+setTimeout(escrever, 1200);
+</script>
+
+</body>
+</html>
